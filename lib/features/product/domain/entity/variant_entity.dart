@@ -38,12 +38,5 @@ class Variant extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-        createdAt,
-        id,
-        media,
-        price,
-        title,
-        updatedAt,
-      ];
+  List<Object?> get props => [createdAt, id, media, price, title, updatedAt];
 }

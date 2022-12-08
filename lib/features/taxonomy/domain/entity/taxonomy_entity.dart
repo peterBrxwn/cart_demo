@@ -33,11 +33,5 @@ class Taxonomy extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-        createdAt,
-        id,
-        name,
-        slug,
-        updatedAt,
-      ];
+  List<Object?> get props => [createdAt, id, name, slug, updatedAt];
 }

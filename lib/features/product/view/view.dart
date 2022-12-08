@@ -1,8 +1,6 @@
-import 'package:cart_demo/core/strings.dart';
-import 'package:cart_demo/features/category/bloc/category_bloc.dart'
-    hide Status;
+import 'package:cart_demo/features/category/bloc/category_bloc.dart';
 import 'package:cart_demo/features/notification/view/view.dart';
-import 'package:cart_demo/features/order/bloc/order_bloc.dart' hide Status;
+import 'package:cart_demo/features/order/bloc/order_bloc.dart';
 import 'package:cart_demo/features/product/bloc/product_bloc.dart';
 import 'package:cart_demo/features/product/domain/entity/variant_entity.dart';
 import 'package:cart_demo/features/taxonomy/domain/entity/taxon_entity.dart';
@@ -44,181 +42,25 @@ class _View extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              constraints: BoxConstraints(
-                minHeight: 300,
-                minWidth: MediaQuery.of(context).size.width,
-              ),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                    "$kImagePath${ImageUtils.validImage(taxon.slug)}-bg.png",
-                  ),
-                  colorFilter: ColorFilter.mode(
-                    Colors.black.withOpacity(0.3),
-                    BlendMode.darken,
-                  ),
-                  fit: BoxFit.fitHeight,
-                ),
-              ),
-              child: SafeArea(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    IconButton(
-                      icon: const Icon(
-                        Icons.arrow_back_ios_rounded,
-                        color: AppTheme.white,
-                      ),
-                      onPressed: () {
-                        context
-                            .read<CategoryBloc>()
-                            .add(const CategorySelected(taxon: null));
-                      },
-                    ),
-                    const SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: Text(
-                        taxon.name,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline4!
-                            .copyWith(color: AppTheme.white),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            _PageHeader(taxon: taxon),
             Padding(
               padding: const EdgeInsets.all(20),
               child: BlocBuilder<ProductBloc, ProductState>(
                 buildWhen: (previous, current) =>
                     current.status != previous.status,
                 builder: (context, state) {
-                  if (state.status == Status.loading) return const Loading();
-                  if (state.status == Status.error) return const Message();
+                  if (state.status == ProductStatus.loading) {
+                    return const Loading();
+                  }
+                  if (state.status == ProductStatus.error) {
+                    return const Message();
+                  }
 
                   return Column(
                     children: [
                       for (final product in state.products)
                         for (final variant in product.variants)
-                          Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        variant.title,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Proteins',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .overline!
-                                                    .copyWith(
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                              ),
-                                              Text(
-                                                '16.2 gr',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .caption!,
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(width: 10),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Carbohydrate',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .overline!
-                                                    .copyWith(
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                              ),
-                                              Text(
-                                                '16.2 gr',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .caption!,
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(width: 10),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Fibre',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .overline!
-                                                    .copyWith(
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                              ),
-                                              Text(
-                                                '16.2 gr',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .caption!,
-                                              ),
-                                            ],
-                                          ),
-                                          const _PieChart(),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          _ToggleQuantityButton(
-                                              variant: variant),
-                                          const SizedBox(width: 10),
-                                          Text(variant.price.formatted),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  ClipRRect(
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(20),
-                                    ),
-                                    child: Image.network(variant.media),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 15),
-                              const Divider(),
-                              const SizedBox(height: 15),
-                            ],
-                          ),
+                          _ProductDetail(variant: variant),
                     ],
                   );
                 },
@@ -227,6 +69,160 @@ class _View extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _PageHeader extends StatelessWidget {
+  const _PageHeader({required this.taxon, Key? key}) : super(key: key);
+  final Taxon taxon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      constraints: BoxConstraints(
+        minHeight: 300,
+        minWidth: MediaQuery.of(context).size.width,
+      ),
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(
+            "${ImageUtils.validImage(taxon.slug)}-bg.png",
+          ),
+          colorFilter: ColorFilter.mode(
+            Colors.black.withOpacity(0.3),
+            BlendMode.darken,
+          ),
+          fit: BoxFit.fitHeight,
+        ),
+      ),
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            IconButton(
+              icon: const Icon(
+                Icons.arrow_back_ios_rounded,
+                color: AppTheme.white,
+              ),
+              onPressed: () {
+                context
+                    .read<CategoryBloc>()
+                    .add(const CategorySelected(taxon: null));
+              },
+            ),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: Text(
+                taxon.name,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline4!
+                    .copyWith(color: AppTheme.white),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ProductDetail extends StatelessWidget {
+  const _ProductDetail({required this.variant, Key? key}) : super(key: key);
+  final Variant variant;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  variant.title,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Proteins',
+                          style: Theme.of(context).textTheme.overline!.copyWith(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                              ),
+                        ),
+                        Text(
+                          '16.2 gr',
+                          style: Theme.of(context).textTheme.caption!,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Carbohydrate',
+                          style: Theme.of(context).textTheme.overline!.copyWith(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                              ),
+                        ),
+                        Text(
+                          '16.2 gr',
+                          style: Theme.of(context).textTheme.caption!,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Fibre',
+                          style: Theme.of(context).textTheme.overline!.copyWith(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                              ),
+                        ),
+                        Text(
+                          '16.2 gr',
+                          style: Theme.of(context).textTheme.caption!,
+                        ),
+                      ],
+                    ),
+                    const _PieChart(),
+                  ],
+                ),
+                Row(
+                  children: [
+                    _ToggleQuantityButton(variant: variant),
+                    const SizedBox(width: 10),
+                    Text(variant.price.formatted),
+                  ],
+                ),
+              ],
+            ),
+            ClipRRect(
+              borderRadius: const BorderRadius.all(
+                Radius.circular(20),
+              ),
+              child: Image.network(variant.media),
+            ),
+          ],
+        ),
+        const SizedBox(height: 15),
+        const Divider(),
+        const SizedBox(height: 15),
+      ],
     );
   }
 }
@@ -288,9 +284,7 @@ class _ToggleQuantityButton extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              context.read<OrderBloc>().add(
-                    OrderIncrement(id: variant.id, variant: variant),
-                  );
+              context.read<OrderBloc>().add(OrderIncrement(variant: variant));
             },
             child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 17, vertical: 10),

@@ -10,7 +10,7 @@ const kDefaultError = 'Oops something went wrong!';
 const kBadRequestError = 'Bad request, please try again.';
 const kNotFoundError = 'An error occured, please try again.';
 const kRequestCancelledError = 'Request to server was cancelled.';
-const kError = 'Unable to read server response';
+const kError = 'Something went wrong.';
 
 // storage
 const String kReferralId = 'referralId';

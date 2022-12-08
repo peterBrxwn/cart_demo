@@ -17,6 +17,7 @@ class ProductApiParam extends Equatable {
   final String taxons;
 
   Map<String, dynamic> toJson() => _$ProductApiParamToJson(this);
+
   @override
   List<Object?> get props => [taxons];
 }

@@ -1,14 +1,12 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cart_demo/core/network/network.dart' hide Status;
-import 'package:cart_demo/core/strings.dart';
 import 'package:cart_demo/features/category/bloc/category_bloc.dart';
 import 'package:cart_demo/features/notification/view/view.dart';
-import 'package:cart_demo/features/product/bloc/product_bloc.dart' hide Status;
-import 'package:cart_demo/features/product/data/datasources/product_datasource.dart';
+import 'package:cart_demo/features/product/bloc/product_bloc.dart';
 import 'package:cart_demo/features/product/services/repo.dart';
 import 'package:cart_demo/features/product/view/view.dart';
-import 'package:cart_demo/features/taxonomy/data/datasources/taxonomy_datasource.dart';
+import 'package:cart_demo/features/taxonomy/domain/entity/taxon_entity.dart';
 import 'package:cart_demo/features/taxonomy/services/repo.dart';
+import 'package:cart_demo/injection.dart';
 import 'package:cart_demo/shared/loading.dart';
 import 'package:cart_demo/shared/message.dart';
 import 'package:cart_demo/utils/app_theme.dart';
@@ -25,24 +23,18 @@ class CategoryPage extends StatelessWidget implements AutoRouteWrapper {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) {
+          create: (_) {
             return CategoryBloc(
-              // taxonomyRepo: context.read<TaxonomyImpl>()
-              taxonomyRepo: TaxonomyImpl(
-                TaxonomyDatasourceImpl(apiClient: ApiClient()),
-              ),
+              taxonomyRepo: locator<TaxonomyImpl>(),
             )..add(const CategoryInit());
           },
         ),
         BlocProvider(
-          create: (context) {
+          create: (_) {
             return ProductBloc(
-              productRepo: ProductImpl(
-                ProductDatasourceImpl(apiClient: ApiClient()),
-              ),
+              productRepo: locator<ProductImpl>(),
             );
           },
-          child: this,
         ),
       ],
       child: this,
@@ -52,15 +44,13 @@ class CategoryPage extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     return BlocListener<CategoryBloc, CategoryState>(
-      listenWhen: (previous, current) => current.status != previous.status,
+      listenWhen: (previous, current) => current.notifMsg != null,
       listener: (context, state) {
-        if (state.status == Status.error) {
-          Notify.generic(
-            context,
-            state.notifMsg!.type,
-            state.notifMsg!.message,
-          );
-        }
+        Notify.generic(
+          context,
+          state.notifMsg!.type,
+          state.notifMsg!.message,
+        );
       },
       child: BlocBuilder<CategoryBloc, CategoryState>(
         buildWhen: (previous, current) => previous.selected != current.selected,
@@ -86,53 +76,59 @@ class _View extends StatelessWidget {
           child: BlocBuilder<CategoryBloc, CategoryState>(
             buildWhen: (previous, current) => current.status != previous.status,
             builder: (context, state) {
-              if (state.status == Status.loading) return const Loading();
-              if (state.status == Status.error) return const Message();
+              if (state.status == CategoryStatus.loading) {
+                return const Loading();
+              }
+              if (state.status == CategoryStatus.error) return const Message();
 
               return GridView.count(
                 crossAxisCount: 2,
                 children: [
                   for (int i = 0; i < state.taxons.length; i++)
-                    InkWell(
-                      onTap: () {
-                        context
-                            .read<CategoryBloc>()
-                            .add(CategorySelected(taxon: state.taxons[i]));
-                        context
-                            .read<ProductBloc>()
-                            .add(ProductInit(taxon: state.taxons[i].slug));
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.all(10),
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          border: Border.all(
-                            color: AppTheme.lightGrey,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(20),
-                          ),
-                        ),
-                        child: Column(
-                          children: [
-                            Expanded(
-                              child: Image(
-                                image: AssetImage(
-                                  "$kImagePath${ImageUtils.validImage(state.taxons[i].slug)}.png",
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 15),
-                            Text(state.taxons[i].name),
-                          ],
-                        ),
-                      ),
-                    ),
+                    _CategoryDetail(taxon: state.taxons[i]),
                 ],
               );
             },
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _CategoryDetail extends StatelessWidget {
+  const _CategoryDetail({required this.taxon, Key? key}) : super(key: key);
+  final Taxon taxon;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        context.read<CategoryBloc>().add(CategorySelected(taxon: taxon));
+        context.read<ProductBloc>().add(ProductInit(taxon: taxon.slug));
+      },
+      child: Container(
+        margin: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          border: Border.all(
+            color: AppTheme.lightGrey,
+          ),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(20),
+          ),
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              child: Image.asset(
+                "${ImageUtils.validImage(taxon.slug)}.png",
+              ),
+            ),
+            const SizedBox(height: 15),
+            Text(taxon.name),
+          ],
         ),
       ),
     );

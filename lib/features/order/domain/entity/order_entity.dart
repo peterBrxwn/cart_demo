@@ -12,11 +12,7 @@ class Order extends Equatable {
     required this.quantity,
   });
 
-  Order copyWith({
-    String? name,
-    int? price,
-    int? quantity,
-  }) {
+  Order copyWith({String? name, int? price, int? quantity}) {
     return Order(
       name: name ?? this.name,
       price: price ?? this.price,
@@ -25,9 +21,5 @@ class Order extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-        name,
-        price,
-        quantity,
-      ];
+  List<Object?> get props => [name, price, quantity];
 }

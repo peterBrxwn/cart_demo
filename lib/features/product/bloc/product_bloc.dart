@@ -13,15 +13,15 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     required ProductRepo productRepo,
   })  : _productRepo = productRepo,
         super(const ProductState()) {
-    on<ProductInit>(_productDetailInit);
+    on<ProductInit>(_productInit);
   }
   final ProductRepo _productRepo;
 
-  Future<void> _productDetailInit(
+  Future<void> _productInit(
     ProductInit event,
     Emitter<ProductState> emit,
   ) async {
-    emit(state.copyWith(status: Status.loading));
+    emit(state.copyWith(status: ProductStatus.loading));
 
     final products = await _productRepo.list(
       param: ProductApiParam(taxons: event.taxon),
@@ -30,10 +30,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       (l) => emit(
         state.copyWith(
           notifMsg: NotifMsg(message: l.message),
-          status: Status.error,
+          status: ProductStatus.error,
         ),
       ),
-      (r) => emit(state.copyWith(status: Status.loaded, products: r)),
+      (r) => emit(state.copyWith(products: r, status: ProductStatus.loaded)),
     );
   }
 }

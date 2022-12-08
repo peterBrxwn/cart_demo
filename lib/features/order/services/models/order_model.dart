@@ -18,11 +18,7 @@ class OrderModel extends Order {
     required String name,
     required int price,
     required int quantity,
-  }) : super(
-          name: name,
-          price: price,
-          quantity: quantity,
-        );
+  }) : super(name: name, price: price, quantity: quantity);
 
   factory OrderModel.fromJson(Map<String, dynamic> json) =>
       _$OrderModelFromJson(json);

@@ -6,15 +6,9 @@ class Product extends Equatable {
   final String title;
   final List<Variant> variants;
 
-  const Product({
-    required this.title,
-    required this.variants,
-  });
+  const Product({required this.title, required this.variants});
 
-  Product copyWith({
-    String? title,
-    List<Variant>? variants,
-  }) {
+  Product copyWith({String? title, List<Variant>? variants}) {
     return Product(
       title: title ?? this.title,
       variants: variants ?? this.variants,

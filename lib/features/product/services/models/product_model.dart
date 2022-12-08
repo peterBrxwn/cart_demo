@@ -17,10 +17,8 @@ class ProductModel extends Product {
   @JsonKey(name: 'variants')
   final List<VariantModel> variantsModel;
 
-  const ProductModel({
-    required String title,
-    required this.variantsModel,
-  }) : super(title: title, variants: variantsModel);
+  const ProductModel({required String title, required this.variantsModel})
+      : super(title: title, variants: variantsModel);
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);

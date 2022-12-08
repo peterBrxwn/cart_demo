@@ -21,14 +21,14 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     CategoryInit event,
     Emitter<CategoryState> emit,
   ) async {
-    emit(state.copyWith(status: Status.loading));
+    emit(state.copyWith(status: CategoryStatus.loading));
 
     final taxons = await _taxonomyRepo.list(
       param: const TaxonomyApiParam(taxonomy: 'food-type'),
     );
     taxons.fold(
       (l) => emit(state.copyWith(notifMsg: NotifMsg(message: l.message))),
-      (r) => emit(state.copyWith(status: Status.loaded, taxons: r)),
+      (r) => emit(state.copyWith(status: CategoryStatus.loaded, taxons: r)),
     );
   }
 

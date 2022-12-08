@@ -4,24 +4,24 @@ class CategoryState extends Equatable {
   const CategoryState({
     this.notifMsg,
     this.selected,
-    this.status = Status.loading,
+    this.status = CategoryStatus.loading,
     this.taxons = const [],
   });
   final NotifMsg? notifMsg;
   final Taxon? selected;
-  final Status? status;
+  final CategoryStatus? status;
   final List<Taxon> taxons;
 
   CategoryState copyWith({
     NotifMsg? notifMsg,
     Taxon? Function()? selected,
-    Status? status,
+    CategoryStatus? status,
     List<Taxon>? taxons,
   }) {
     return CategoryState(
       notifMsg: notifMsg ?? this.notifMsg,
       selected: selected != null ? selected() : this.selected,
-      status: status ?? Status.initial,
+      status: status ?? CategoryStatus.initial,
       taxons: taxons ?? this.taxons,
     );
   }
@@ -30,4 +30,4 @@ class CategoryState extends Equatable {
   List<Object?> get props => [notifMsg, selected, status, taxons];
 }
 
-enum Status { initial, loading, error, loaded }
+enum CategoryStatus { initial, loading, error, loaded }
