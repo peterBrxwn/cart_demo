@@ -1,5 +1,5 @@
 # Cart Demo App
-This is the source code for the Cart Demo mobile app (ios and android) built using flutter programming language.
+This is the source code for the demo app Cart Demo mobile app (ios and android) built using flutter programming language.
 
 #### App Screenshots
 
@@ -18,7 +18,7 @@ This is the source code for the Cart Demo mobile app (ios and android) built usi
     <td>&nbsp;</td>
     <td><img src="/assets/screenshots/3.png" width=270></td>
   </tr>
- </table>
+</table>
 
 ## Requirements
 -  Flutter version 3.3.0
