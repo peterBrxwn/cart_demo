@@ -8,7 +8,7 @@ class OrderState extends Equatable {
     this.orderCount = 0,
     this.orders = const {},
     this.orderTotal = 0,
-    this.status = Status.initial,
+    this.status = OrderStatus.initial,
   });
   final double deliveryFee;
   final Map<int, int> idToQuantity;
@@ -16,7 +16,7 @@ class OrderState extends Equatable {
   final int orderCount;
   final Map<int, Variant> orders;
   final double orderTotal;
-  final Status? status;
+  final OrderStatus? status;
 
   OrderState copyWith({
     double? deliveryFee,
@@ -25,7 +25,7 @@ class OrderState extends Equatable {
     int? orderCount,
     Map<int, Variant>? orders,
     double? orderTotal,
-    Status? status,
+    OrderStatus? status,
   }) {
     return OrderState(
       deliveryFee: deliveryFee ?? this.deliveryFee,
@@ -34,7 +34,7 @@ class OrderState extends Equatable {
       orderCount: (orders ?? this.orders).keys.length,
       orders: orders ?? this.orders,
       orderTotal: orderTotal ?? this.orderTotal,
-      status: status ?? Status.initial,
+      status: status ?? OrderStatus.initial,
     );
   }
 
@@ -50,4 +50,4 @@ class OrderState extends Equatable {
       ];
 }
 
-enum Status { initial, error }
+enum OrderStatus { initial, error }

@@ -1,3 +1,6 @@
+// Project imports:
+import 'package:cart_demo/core/strings.dart';
+
 class ImageUtils {
   static final validImageMap = {
     'asian': 'asian',
@@ -7,6 +10,6 @@ class ImageUtils {
     'pasta': 'pasta',
   };
   static String validImage(name) {
-    return validImageMap[name] ?? 'fast-food';
+    return kImagePath + (validImageMap[name] ?? 'fast-food');
   }
 }

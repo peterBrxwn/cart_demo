@@ -1,7 +1,10 @@
-import 'package:cart_demo/features/notification/services/models/notif_msg.dart';
-import 'package:cart_demo/features/product/domain/entity/variant_entity.dart';
+// Package imports:
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
+import 'package:cart_demo/features/notification/services/models/notif_msg.dart';
+import 'package:cart_demo/features/product/domain/entity/variant_entity.dart';
 
 part 'order_event.dart';
 part 'order_state.dart';
@@ -44,12 +47,12 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   void _orderIncrement(OrderIncrement event, Emitter<OrderState> emit) {
     final idToQuantity = Map.of(state.idToQuantity);
     final orders = Map.of(state.orders);
-    if (!orders.containsKey(event.id)) {
-      idToQuantity[event.id] = 0;
-      orders[event.id] = event.variant;
+    if (!orders.containsKey(event.variant.id)) {
+      idToQuantity[event.variant.id] = 0;
+      orders[event.variant.id] = event.variant;
     }
 
-    idToQuantity[event.id] = idToQuantity[event.id]! + 1;
+    idToQuantity[event.variant.id] = idToQuantity[event.variant.id]! + 1;
     emit(state.copyWith(idToQuantity: idToQuantity, orders: orders));
     add(const OrderQuantityChanged());
   }

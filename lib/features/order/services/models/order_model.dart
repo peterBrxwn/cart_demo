@@ -1,8 +1,10 @@
 // Dart imports:
 
 // Package imports:
-import 'package:cart_demo/features/order/domain/entity/order_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+// Project imports:
+import 'package:cart_demo/features/order/domain/entity/order_entity.dart';
 
 // Project imports:
 
@@ -18,11 +20,7 @@ class OrderModel extends Order {
     required String name,
     required int price,
     required int quantity,
-  }) : super(
-          name: name,
-          price: price,
-          quantity: quantity,
-        );
+  }) : super(name: name, price: price, quantity: quantity);
 
   factory OrderModel.fromJson(Map<String, dynamic> json) =>
       _$OrderModelFromJson(json);

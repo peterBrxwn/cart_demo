@@ -21,6 +21,7 @@ Map<String, dynamic> _$VariantModelToJson(VariantModel instance) =>
     <String, dynamic>{
       'created_at': instance.createdAt.toIso8601String(),
       'id': instance.id,
+      'media': instance.media,
       'title': instance.title,
       'updated_at': instance.updatedAt.toIso8601String(),
       'price': instance.priceModel.toJson(),

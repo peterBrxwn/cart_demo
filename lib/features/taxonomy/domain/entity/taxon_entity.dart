@@ -1,6 +1,8 @@
 // Package imports:
-import 'package:cart_demo/features/taxonomy/domain/entity/taxonomy_entity.dart';
 import 'package:equatable/equatable.dart';
+
+// Project imports:
+import 'package:cart_demo/features/taxonomy/domain/entity/taxonomy_entity.dart';
 
 class Taxon extends Equatable {
   final DateTime createdAt;
@@ -38,12 +40,5 @@ class Taxon extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-        createdAt,
-        id,
-        name,
-        slug,
-        taxonomy,
-        updatedAt,
-      ];
+  List<Object?> get props => [createdAt, id, name, slug, taxonomy, updatedAt];
 }

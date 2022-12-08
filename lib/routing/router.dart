@@ -1,8 +1,9 @@
 // Package imports:
 import 'package:auto_route/auto_route.dart';
+
+// Project imports:
 import 'package:cart_demo/features/category/view/view.dart';
 import 'package:cart_demo/features/order/view/view.dart';
-import 'package:cart_demo/features/product/view/view.dart';
 import 'package:cart_demo/features/tab/view/view.dart';
 
 // Project imports:

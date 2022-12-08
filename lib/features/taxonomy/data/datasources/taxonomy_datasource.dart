@@ -1,3 +1,7 @@
+// Package imports:
+import 'package:dartz/dartz.dart';
+
+// Project imports:
 import 'package:cart_demo/core/app_error.dart';
 import 'package:cart_demo/core/exceptions.dart';
 import 'package:cart_demo/core/network/api_client.dart';
@@ -6,7 +10,6 @@ import 'package:cart_demo/core/typedef.dart';
 import 'package:cart_demo/features/taxonomy/domain/params/taxonomy_api_param.dart';
 import 'package:cart_demo/features/taxonomy/services/models/taxon_model.dart';
 import 'package:cart_demo/utils/strings.dart';
-import 'package:dartz/dartz.dart';
 
 abstract class TaxonomyDatasource {
   Future<ErrorOrType<List<TaxonModel>>> list(TaxonomyApiParam param);

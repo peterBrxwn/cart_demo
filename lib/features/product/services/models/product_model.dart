@@ -1,9 +1,11 @@
 // Dart imports:
 
 // Package imports:
+import 'package:json_annotation/json_annotation.dart';
+
+// Project imports:
 import 'package:cart_demo/features/product/domain/entity/product_entity.dart';
 import 'package:cart_demo/features/product/services/models/variant_model.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 // Project imports:
 part 'product_model.g.dart';
@@ -17,10 +19,8 @@ class ProductModel extends Product {
   @JsonKey(name: 'variants')
   final List<VariantModel> variantsModel;
 
-  const ProductModel({
-    required String title,
-    required this.variantsModel,
-  }) : super(title: title, variants: variantsModel);
+  const ProductModel({required String title, required this.variantsModel})
+      : super(title: title, variants: variantsModel);
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);

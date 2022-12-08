@@ -1,14 +1,18 @@
+// Dart imports:
 import 'dart:io';
 
+// Flutter imports:
+import 'package:flutter/foundation.dart';
+
+// Package imports:
+import 'package:dio/dio.dart';
+import 'package:mime_type/mime_type.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+// Project imports:
 import 'package:cart_demo/core/config.dart';
 import 'package:cart_demo/core/exceptions.dart';
 import 'package:cart_demo/injection.dart';
-import 'package:cart_demo/utils/strings.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
-import 'package:logging/logging.dart';
-import 'package:mime_type/mime_type.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiClient {
   ApiClient() {
@@ -54,8 +58,6 @@ class ApiClient {
 
   static String baseUrl = AppConfig.baseUrl;
 
-  final log = Logger(kMonthlyLogger);
-
   Future<Response> get(
     String uri, {
     Map<String, dynamic>? queryParameters,
@@ -67,8 +69,7 @@ class ApiClient {
         queryParameters: queryParameters,
       );
       return response;
-    } catch (e, stackTrace) {
-      log.severe('Monthly Exception: $e $stackTrace');
+    } catch (e, _) {
       throw ApiException.getException(e);
     }
   }
@@ -86,8 +87,7 @@ class ApiClient {
         queryParameters: queryParameters,
       );
       return response;
-    } catch (e, stackTrace) {
-      log.severe('Monthly Exception: $e $stackTrace');
+    } catch (e, _) {
       throw ApiException.getException(e);
     }
   }
@@ -119,8 +119,7 @@ class ApiClient {
         queryParameters: queryParameters,
       );
       return response;
-    } catch (e, stackTrace) {
-      log.severe('Monthly Exception: $e $stackTrace');
+    } catch (e, _) {
       throw ApiException.getException(e);
     }
   }
@@ -137,8 +136,7 @@ class ApiClient {
         queryParameters: queryParameters,
       );
       return response;
-    } catch (e, stackTrace) {
-      log.severe('Monthly Exception: $e $stackTrace');
+    } catch (e, _) {
       throw ApiException.getException(e);
     }
   }
@@ -156,8 +154,7 @@ class ApiClient {
         queryParameters: queryParameters,
       );
       return response;
-    } catch (e, stackTrace) {
-      log.severe('Monthly Exception: $e $stackTrace');
+    } catch (e, _) {
       throw ApiException.getException(e);
     }
   }
@@ -189,8 +186,7 @@ class ApiClient {
           },
         ),
       );
-    } on DioError catch (e, stackTrace) {
-      log.severe('Monthly Exception: $e $stackTrace');
+    } on DioError catch (e, _) {
       throw e.response?.statusMessage ?? 'connection bad gon';
     }
     return response;

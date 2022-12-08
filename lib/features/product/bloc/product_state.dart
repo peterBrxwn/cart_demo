@@ -3,21 +3,21 @@ part of 'product_bloc.dart';
 class ProductState extends Equatable {
   const ProductState({
     this.notifMsg,
-    this.status = Status.loading,
+    this.status = ProductStatus.loading,
     this.products = const [],
   });
   final NotifMsg? notifMsg;
-  final Status? status;
+  final ProductStatus? status;
   final List<Product> products;
 
   ProductState copyWith({
     NotifMsg? notifMsg,
-    Status? status,
+    ProductStatus? status,
     List<Product>? products,
   }) {
     return ProductState(
       notifMsg: notifMsg ?? this.notifMsg,
-      status: status ?? Status.initial,
+      status: status ?? ProductStatus.initial,
       products: products ?? this.products,
     );
   }
@@ -26,4 +26,4 @@ class ProductState extends Equatable {
   List<Object?> get props => [notifMsg, status, products];
 }
 
-enum Status { initial, loading, error, loaded }
+enum ProductStatus { initial, loading, error, loaded }

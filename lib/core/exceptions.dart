@@ -1,7 +1,11 @@
+// Dart imports:
 import 'dart:io';
 
-import 'package:cart_demo/utils/strings.dart';
+// Package imports:
 import 'package:dio/dio.dart';
+
+// Project imports:
+import 'package:cart_demo/utils/strings.dart';
 
 class ApiException implements Exception {
   ApiException(this.message);
@@ -33,46 +37,7 @@ class ApiException implements Exception {
         }
         break;
       case DioErrorType.response:
-        /* cases where we have a custom error message from the APIs
-        We'll have a response from the APIs [for some status codes],
-
-        IF THERE IS A PAYLOAD,
-
-        e.g 
-        {
-          "status": false,
-          "message": "Incorrect credentials",
-        }
-
-        we extract the value present in the key=>[message]
-
-
-        {
-  "status": 400,
-  "error": "InvalidRequestException",
-  "message": "One or more of the request fields is invalid",
-  "details": [
-    {
-      "field": "phone_number",
-      "invalid_value": "string",
-      "message": "The phone number \"string\" is not valid."
-    },
-        */
         if (err.response?.data != null) {
-          // if ((err.response!.data as Map).containsKey('details')) {
-          //   if (((err.response!.data as Map)['details'] as List).isNotEmpty) {
-          //     List list = ((err.response!.data as Map)['details']);
-          //     if (list.any((item) => item != {})) {
-          //       return OtherExceptions(list[0]);
-          //     }
-          //     return OtherExceptions(list[0]['message']);
-          //   } else if ((err.response!.data as Map).containsKey('message')) {
-          //     return OtherExceptions(
-          //         (err.response?.data as Map)['message'] ?? '');
-          //   } else {
-          //     return OtherExceptions((err.response!.data as Map)['message']);
-          //   }
-          // }
           try {
             return OtherExceptions(
               (err.response?.data as Map)['message'] ?? '',

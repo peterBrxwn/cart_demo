@@ -23,12 +23,11 @@ class OrderDecrement extends OrderEvent {
 }
 
 class OrderIncrement extends OrderEvent {
-  const OrderIncrement({required this.id, required this.variant});
-  final int id;
+  const OrderIncrement({required this.variant});
   final Variant variant;
 
   @override
-  List<Object> get props => [id, variant];
+  List<Object> get props => [variant];
 }
 
 class OrderQuantityChanged extends OrderEvent {

@@ -1,4 +1,4 @@
-// Package imports:
+// Project imports:
 import 'package:cart_demo/core/typedef.dart';
 import 'package:cart_demo/features/product/data/datasources/product_datasource.dart';
 import 'package:cart_demo/features/product/domain/entity/product_entity.dart';

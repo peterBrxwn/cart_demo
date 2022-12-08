@@ -1,8 +1,10 @@
 // Dart imports:
 
 // Package imports:
-import 'package:cart_demo/features/product/domain/entity/price_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+// Project imports:
+import 'package:cart_demo/features/product/domain/entity/price_entity.dart';
 
 // Project imports:
 part 'price_model.g.dart';
