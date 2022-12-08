@@ -197,16 +197,20 @@ class _CheckoutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
+        final bloc = context.read<OrderBloc>();
+        final total = bloc.state.orderTotal.asCurrency(
+          bloc.state.orders.values.first.price.formatted[0],
+        );
         showCupertinoDialog(
           context: context,
           builder: (_) {
             return CupertinoAlertDialog(
               title: const Text('Checkout'),
-              content: const Text('Checkout Successful'),
+              content: Text('$total. Checkout Successful'),
               actions: [
                 CupertinoDialogAction(
                   onPressed: () {
-                    context.read<OrderBloc>().add(const OrderClear());
+                    bloc.add(const OrderClear());
                     context.router.pop();
                   },
                   child: const Text('Ok'),

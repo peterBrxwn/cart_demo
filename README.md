@@ -1,6 +1,9 @@
 # Cart Demo App
 This is the source code for the demo app Cart Demo mobile app (ios and android) built using flutter programming language.
 
+## APK FILE
+APK file can be found in "/assets/app-release.apk"
+
 #### App Screenshots
 
 <table>
