@@ -1,6 +1,8 @@
 // Package imports:
-import 'package:cart_demo/features/taxonomy/domain/entity/taxonomy_entity.dart';
 import 'package:equatable/equatable.dart';
+
+// Project imports:
+import 'package:cart_demo/features/taxonomy/domain/entity/taxonomy_entity.dart';
 
 class Taxon extends Equatable {
   final DateTime createdAt;

@@ -1,6 +1,8 @@
 // Package imports:
-import 'package:cart_demo/features/product/domain/entity/price_entity.dart';
 import 'package:equatable/equatable.dart';
+
+// Project imports:
+import 'package:cart_demo/features/product/domain/entity/price_entity.dart';
 
 class Variant extends Equatable {
   final DateTime createdAt;

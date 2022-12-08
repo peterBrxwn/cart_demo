@@ -1,8 +1,10 @@
 // Dart imports:
 
 // Package imports:
-import 'package:cart_demo/features/order/domain/entity/order_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+// Project imports:
+import 'package:cart_demo/features/order/domain/entity/order_entity.dart';
 
 // Project imports:
 

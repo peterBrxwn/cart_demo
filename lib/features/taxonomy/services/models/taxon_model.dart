@@ -1,9 +1,11 @@
 // Dart imports:
 
 // Package imports:
+import 'package:json_annotation/json_annotation.dart';
+
+// Project imports:
 import 'package:cart_demo/features/taxonomy/domain/entity/taxon_entity.dart';
 import 'package:cart_demo/features/taxonomy/services/models/taxonomy_model.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 // Project imports:
 part 'taxon_model.g.dart';

@@ -1,4 +1,4 @@
-// Package imports:
+// Project imports:
 import 'package:cart_demo/core/typedef.dart';
 import 'package:cart_demo/features/taxonomy/data/datasources/taxonomy_datasource.dart';
 import 'package:cart_demo/features/taxonomy/domain/entity/taxon_entity.dart';

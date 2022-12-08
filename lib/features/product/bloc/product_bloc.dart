@@ -1,9 +1,12 @@
+// Package imports:
+import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:cart_demo/features/notification/services/models/notif_msg.dart';
 import 'package:cart_demo/features/product/domain/entity/product_entity.dart';
 import 'package:cart_demo/features/product/domain/params/product_api_param.dart';
 import 'package:cart_demo/features/product/domain/repo.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'product_event.dart';
 part 'product_state.dart';

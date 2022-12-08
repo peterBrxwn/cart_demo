@@ -1,4 +1,12 @@
+// Flutter imports:
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:cart_demo/core/extensions.dart';
 import 'package:cart_demo/core/strings.dart';
 import 'package:cart_demo/features/notification/view/view.dart';
@@ -6,9 +14,6 @@ import 'package:cart_demo/features/order/bloc/order_bloc.dart';
 import 'package:cart_demo/features/product/domain/entity/variant_entity.dart';
 import 'package:cart_demo/shared/message.dart';
 import 'package:cart_demo/utils/app_theme.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderPage extends StatelessWidget {
   const OrderPage({Key? key}) : super(key: key);

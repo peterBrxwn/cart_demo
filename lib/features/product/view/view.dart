@@ -1,3 +1,11 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pie_chart/pie_chart.dart';
+
+// Project imports:
 import 'package:cart_demo/features/category/bloc/category_bloc.dart';
 import 'package:cart_demo/features/notification/view/view.dart';
 import 'package:cart_demo/features/order/bloc/order_bloc.dart';
@@ -8,9 +16,6 @@ import 'package:cart_demo/shared/loading.dart';
 import 'package:cart_demo/shared/message.dart';
 import 'package:cart_demo/utils/app_theme.dart';
 import 'package:cart_demo/utils/image_utils.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pie_chart/pie_chart.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({required this.taxon, Key? key}) : super(key: key);

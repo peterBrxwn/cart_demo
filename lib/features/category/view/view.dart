@@ -1,4 +1,11 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:cart_demo/features/category/bloc/category_bloc.dart';
 import 'package:cart_demo/features/notification/view/view.dart';
 import 'package:cart_demo/features/product/bloc/product_bloc.dart';
@@ -11,8 +18,6 @@ import 'package:cart_demo/shared/loading.dart';
 import 'package:cart_demo/shared/message.dart';
 import 'package:cart_demo/utils/app_theme.dart';
 import 'package:cart_demo/utils/image_utils.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CategoryPage extends StatelessWidget implements AutoRouteWrapper {
   const CategoryPage({Key? key}) : super(key: key);

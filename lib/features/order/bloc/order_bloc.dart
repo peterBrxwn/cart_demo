@@ -1,7 +1,10 @@
-import 'package:cart_demo/features/notification/services/models/notif_msg.dart';
-import 'package:cart_demo/features/product/domain/entity/variant_entity.dart';
+// Package imports:
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
+import 'package:cart_demo/features/notification/services/models/notif_msg.dart';
+import 'package:cart_demo/features/product/domain/entity/variant_entity.dart';
 
 part 'order_event.dart';
 part 'order_state.dart';

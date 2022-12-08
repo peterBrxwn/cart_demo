@@ -1,7 +1,11 @@
+// Dart imports:
 import 'dart:io';
 
-import 'package:cart_demo/utils/strings.dart';
+// Package imports:
 import 'package:dio/dio.dart';
+
+// Project imports:
+import 'package:cart_demo/utils/strings.dart';
 
 class ApiException implements Exception {
   ApiException(this.message);

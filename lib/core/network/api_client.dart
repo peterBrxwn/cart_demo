@@ -1,12 +1,18 @@
+// Dart imports:
 import 'dart:io';
 
+// Flutter imports:
+import 'package:flutter/foundation.dart';
+
+// Package imports:
+import 'package:dio/dio.dart';
+import 'package:mime_type/mime_type.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+// Project imports:
 import 'package:cart_demo/core/config.dart';
 import 'package:cart_demo/core/exceptions.dart';
 import 'package:cart_demo/injection.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
-import 'package:mime_type/mime_type.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiClient {
   ApiClient() {

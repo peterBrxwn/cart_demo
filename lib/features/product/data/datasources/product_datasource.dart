@@ -1,3 +1,7 @@
+// Package imports:
+import 'package:dartz/dartz.dart';
+
+// Project imports:
 import 'package:cart_demo/core/app_error.dart';
 import 'package:cart_demo/core/exceptions.dart';
 import 'package:cart_demo/core/network/api_client.dart';
@@ -7,7 +11,6 @@ import 'package:cart_demo/features/product/domain/entity/product_entity.dart';
 import 'package:cart_demo/features/product/domain/params/product_api_param.dart';
 import 'package:cart_demo/features/product/services/models/product_model.dart';
 import 'package:cart_demo/utils/strings.dart';
-import 'package:dartz/dartz.dart';
 
 abstract class ProductDatasource {
   Future<ErrorOrType<List<Product>>> list(ProductApiParam param);
