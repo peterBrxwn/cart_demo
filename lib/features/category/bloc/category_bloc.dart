@@ -16,7 +16,6 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       : _taxonomyRepo = taxonomyRepo,
         super(const CategoryState()) {
     on<CategoryInit>(_categoryInit);
-    on<CategorySelected>(_categorySelected);
   }
   final TaxonomyRepo _taxonomyRepo;
 
@@ -33,9 +32,5 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       (l) => emit(state.copyWith(notifMsg: NotifMsg(message: l.message))),
       (r) => emit(state.copyWith(status: CategoryStatus.loaded, taxons: r)),
     );
-  }
-
-  void _categorySelected(CategorySelected event, Emitter<CategoryState> emit) {
-    emit(state.copyWith(selected: () => event.taxon));
   }
 }

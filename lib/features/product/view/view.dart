@@ -6,20 +6,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 // Project imports:
-import 'package:cart_demo/features/category/bloc/category_bloc.dart';
 import 'package:cart_demo/features/notification/view/view.dart';
 import 'package:cart_demo/features/order/bloc/order_bloc.dart';
 import 'package:cart_demo/features/product/bloc/product_bloc.dart';
 import 'package:cart_demo/features/product/domain/entity/variant_entity.dart';
-import 'package:cart_demo/features/taxonomy/domain/entity/taxon_entity.dart';
 import 'package:cart_demo/shared/loading.dart';
 import 'package:cart_demo/shared/message.dart';
 import 'package:cart_demo/utils/app_theme.dart';
 import 'package:cart_demo/utils/image_utils.dart';
 
 class ProductPage extends StatelessWidget {
-  const ProductPage({required this.taxon, Key? key}) : super(key: key);
-  final Taxon taxon;
+  const ProductPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +29,13 @@ class ProductPage extends StatelessWidget {
           state.notifMsg!.message,
         );
       },
-      child: _View(taxon: taxon),
+      child: const _View(),
     );
   }
 }
 
 class _View extends StatelessWidget {
-  const _View({required this.taxon, Key? key}) : super(key: key);
-  final Taxon taxon;
+  const _View({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +43,7 @@ class _View extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _PageHeader(taxon: taxon),
+            const _PageHeader(),
             Padding(
               padding: const EdgeInsets.all(20),
               child: BlocBuilder<ProductBloc, ProductState>(
@@ -79,57 +75,60 @@ class _View extends StatelessWidget {
 }
 
 class _PageHeader extends StatelessWidget {
-  const _PageHeader({required this.taxon, Key? key}) : super(key: key);
-  final Taxon taxon;
+  const _PageHeader({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: BoxConstraints(
-        minHeight: 300,
-        minWidth: MediaQuery.of(context).size.width,
-      ),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(
-            "${ImageUtils.validImage(taxon.slug)}-bg.png",
+    return BlocBuilder<ProductBloc, ProductState>(
+      builder: (context, state) {
+        return Container(
+          constraints: BoxConstraints(
+            minHeight: 300,
+            minWidth: MediaQuery.of(context).size.width,
           ),
-          colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.3),
-            BlendMode.darken,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                "${ImageUtils.validImage(state.taxon!.slug)}-bg.png",
+              ),
+              colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.3),
+                BlendMode.darken,
+              ),
+              fit: BoxFit.fitHeight,
+            ),
           ),
-          fit: BoxFit.fitHeight,
-        ),
-      ),
-      child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            IconButton(
-              icon: const Icon(
-                Icons.arrow_back_ios_rounded,
-                color: AppTheme.white,
-              ),
-              onPressed: () {
-                context
-                    .read<CategoryBloc>()
-                    .add(const CategorySelected(taxon: null));
-              },
+          child: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back_ios_rounded,
+                    color: AppTheme.white,
+                  ),
+                  onPressed: () {
+                    context
+                        .read<ProductBloc>()
+                        .add(const ProductInit(taxon: null));
+                  },
+                ),
+                const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Text(
+                    state.taxon!.name,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline4!
+                        .copyWith(color: AppTheme.white),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0),
-              child: Text(
-                taxon.name,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline4!
-                    .copyWith(color: AppTheme.white),
-              ),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

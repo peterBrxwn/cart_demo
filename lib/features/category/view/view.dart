@@ -57,11 +57,11 @@ class CategoryPage extends StatelessWidget implements AutoRouteWrapper {
           state.notifMsg!.message,
         );
       },
-      child: BlocBuilder<CategoryBloc, CategoryState>(
-        buildWhen: (previous, current) => previous.selected != current.selected,
+      child: BlocBuilder<ProductBloc, ProductState>(
+        buildWhen: (previous, current) => previous.taxon != current.taxon,
         builder: (context, state) {
-          if (state.selected == null) return const _View();
-          return ProductPage(taxon: state.selected!);
+          if (state.taxon == null) return const _View();
+          return const ProductPage();
         },
       ),
     );
@@ -109,8 +109,7 @@ class _CategoryDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.read<CategoryBloc>().add(CategorySelected(taxon: taxon));
-        context.read<ProductBloc>().add(ProductInit(taxon: taxon.slug));
+        context.read<ProductBloc>().add(ProductInit(taxon: taxon));
       },
       child: Container(
         margin: const EdgeInsets.all(10),
