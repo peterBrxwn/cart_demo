@@ -1,6 +1,24 @@
 # Cart Demo App
 This is the source code for the Cart Demo mobile app (ios and android) built using flutter programming language.
 
+#### App Screenshots
+
+<table>
+  <tr>
+    <td align="center">Categories Page</td>
+    <td>&nbsp;&nbsp;&nbsp;</td>
+    <td align="center">Product Page</td>
+    <td>&nbsp;&nbsp;&nbsp;</td>
+    <td align="center">Checkout Page</td>
+  </tr>
+  <tr>
+    <td><img src="/assets/screenshots/1.png" width=270></td>
+    <td>&nbsp;</td>
+    <td><img src="/assets/screenshots/2.png" width=270></td>
+    <td>&nbsp;</td>
+    <td><img src="/assets/screenshots/3.png" width=270></td>
+  </tr>
+ </table>
 
 ## Requirements
 -  Flutter version 3.3.0
@@ -58,9 +76,15 @@ flutter build ipa;
 ```bash
   flutter build appbundle;
 ```
+```bash
+  flutter build ipa
+```
+
+### Staging
+Changes are deployed to the staging environment after a PR is merged into the `dev` branch
 
 ### Production
-Changes are deployed to the production environment after a PR is merged into the `main` branch
+Changes are deployed to the production environment after a release is created, click [here](https://github.com/peterbrown0/cart_demo/releases/new) to create a release, see [releases section](#releases)
 
 ## Releases
 
