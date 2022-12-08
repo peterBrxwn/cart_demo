@@ -6,7 +6,7 @@ class OrderState extends Equatable {
     this.idToQuantity = const {},
     this.notifMsg,
     this.orderCount = 0,
-    this.orders = const {},
+    this.idToOrder = const {},
     this.orderTotal = 0,
     this.status = OrderStatus.initial,
   });
@@ -14,7 +14,7 @@ class OrderState extends Equatable {
   final Map<int, int> idToQuantity;
   final NotifMsg? notifMsg;
   final int orderCount;
-  final Map<int, Variant> orders;
+  final Map<int, Variant> idToOrder;
   final double orderTotal;
   final OrderStatus? status;
 
@@ -23,7 +23,7 @@ class OrderState extends Equatable {
     Map<int, int>? idToQuantity,
     NotifMsg? notifMsg,
     int? orderCount,
-    Map<int, Variant>? orders,
+    Map<int, Variant>? idToOrder,
     double? orderTotal,
     OrderStatus? status,
   }) {
@@ -31,8 +31,8 @@ class OrderState extends Equatable {
       deliveryFee: deliveryFee ?? this.deliveryFee,
       idToQuantity: idToQuantity ?? this.idToQuantity,
       notifMsg: notifMsg ?? this.notifMsg,
-      orderCount: (orders ?? this.orders).keys.length,
-      orders: orders ?? this.orders,
+      orderCount: (idToOrder ?? this.idToOrder).keys.length,
+      idToOrder: idToOrder ?? this.idToOrder,
       orderTotal: orderTotal ?? this.orderTotal,
       status: status ?? OrderStatus.initial,
     );
@@ -44,7 +44,7 @@ class OrderState extends Equatable {
         idToQuantity,
         notifMsg,
         orderCount,
-        orders,
+        idToOrder,
         orderTotal,
         status,
       ];

@@ -24,7 +24,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         deliveryFee: 0,
         idToQuantity: {},
         orderCount: 0,
-        orders: {},
+        idToOrder: {},
         orderTotal: 0,
       ),
     );
@@ -46,14 +46,14 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
 
   void _orderIncrement(OrderIncrement event, Emitter<OrderState> emit) {
     final idToQuantity = Map.of(state.idToQuantity);
-    final orders = Map.of(state.orders);
-    if (!orders.containsKey(event.variant.id)) {
+    final idToOrder = Map.of(state.idToOrder);
+    if (!idToOrder.containsKey(event.variant.id)) {
       idToQuantity[event.variant.id] = 0;
-      orders[event.variant.id] = event.variant;
+      idToOrder[event.variant.id] = event.variant;
     }
 
     idToQuantity[event.variant.id] = idToQuantity[event.variant.id]! + 1;
-    emit(state.copyWith(idToQuantity: idToQuantity, orders: orders));
+    emit(state.copyWith(idToQuantity: idToQuantity, idToOrder: idToOrder));
     add(const OrderQuantityChanged());
   }
 
@@ -63,7 +63,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   ) {
     double orderTotal = 0;
     final idToQuantity = Map.of(state.idToQuantity);
-    for (final order in state.orders.values) {
+    for (final order in state.idToOrder.values) {
       orderTotal += (order.price.amount / 100 * idToQuantity[order.id]!);
     }
     final deliveryFee = orderTotal * 0.05;
@@ -77,10 +77,10 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
 
   void _orderRemove(OrderRemove event, Emitter<OrderState> emit) {
     final idToQuantity = Map.of(state.idToQuantity);
-    final orders = Map.of(state.orders);
-    orders.removeWhere((key, value) => key == event.id);
+    final idToOrder = Map.of(state.idToOrder);
+    idToOrder.removeWhere((key, value) => key == event.id);
     idToQuantity.removeWhere((key, value) => key == event.id);
-    emit(state.copyWith(idToQuantity: idToQuantity, orders: orders));
+    emit(state.copyWith(idToQuantity: idToQuantity, idToOrder: idToOrder));
     add(const OrderQuantityChanged());
   }
 }

@@ -55,14 +55,14 @@ class _View extends StatelessWidget {
 
               return Column(
                 children: [
-                  for (final variant in state.orders.values)
+                  for (final variant in state.idToOrder.values)
                     _OrderDetail(variant: variant),
                   ListTile(
                     leading: Image.asset('$kImagePath/delivery.jpg'),
                     title: const Text('Delivery'),
                     trailing: Text(
                       state.deliveryFee.asCurrency(
-                        state.orders.values.first.price.formatted[0],
+                        state.idToOrder.values.first.price.formatted[0],
                       ),
                       style: const TextStyle(color: AppTheme.darkGrey),
                     ),
@@ -75,7 +75,7 @@ class _View extends StatelessWidget {
                     title: const Text('Total:'),
                     trailing: Text(
                       state.orderTotal.asCurrency(
-                        state.orders.values.first.price.formatted[0],
+                        state.idToOrder.values.first.price.formatted[0],
                       ),
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
@@ -199,7 +199,7 @@ class _CheckoutButton extends StatelessWidget {
       onPressed: () {
         final bloc = context.read<OrderBloc>();
         final total = bloc.state.orderTotal.asCurrency(
-          bloc.state.orders.values.first.price.formatted[0],
+          bloc.state.idToOrder.values.first.price.formatted[0],
         );
         showCupertinoDialog(
           context: context,
@@ -233,7 +233,7 @@ class _CheckoutButton extends StatelessWidget {
               builder: (context, state) {
                 return Text(
                   state.orderTotal.asCurrency(
-                    state.orders.values.first.price.formatted[0],
+                    state.idToOrder.values.first.price.formatted[0],
                   ),
                   style: Theme.of(context).textTheme.titleSmall,
                 );
