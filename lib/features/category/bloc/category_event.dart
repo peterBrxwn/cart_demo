@@ -13,11 +13,3 @@ class CategoryInit extends CategoryEvent {
   @override
   List<Object> get props => [];
 }
-
-class CategorySelected extends CategoryEvent {
-  const CategorySelected({required this.taxon});
-  final Taxon? taxon;
-
-  @override
-  List<Object?> get props => [taxon];
-}

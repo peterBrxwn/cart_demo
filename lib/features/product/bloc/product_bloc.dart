@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:cart_demo/features/taxonomy/domain/entity/taxon_entity.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,10 +25,18 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     ProductInit event,
     Emitter<ProductState> emit,
   ) async {
-    emit(state.copyWith(status: ProductStatus.loading));
+    if (event.taxon == null) {
+      return emit(state.copyWith(taxon: () => null));
+    }
+    emit(
+      state.copyWith(
+        status: ProductStatus.loading,
+        taxon: () => event.taxon,
+      ),
+    );
 
     final products = await _productRepo.list(
-      param: ProductApiParam(taxons: event.taxon),
+      param: ProductApiParam(taxons: event.taxon!.slug),
     );
     products.fold(
       (l) => emit(
@@ -36,7 +45,9 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           status: ProductStatus.error,
         ),
       ),
-      (r) => emit(state.copyWith(products: r, status: ProductStatus.loaded)),
+      (r) => emit(
+        state.copyWith(products: r, status: ProductStatus.loaded),
+      ),
     );
   }
 }

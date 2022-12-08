@@ -4,13 +4,13 @@ abstract class ProductEvent extends Equatable {
   const ProductEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class ProductInit extends ProductEvent {
   const ProductInit({required this.taxon});
-  final String taxon;
+  final Taxon? taxon;
 
   @override
-  List<Object> get props => [taxon];
+  List<Object?> get props => [taxon];
 }
