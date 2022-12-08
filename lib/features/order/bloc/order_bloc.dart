@@ -22,9 +22,9 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     emit(
       state.copyWith(
         deliveryFee: 0,
+        idToOrder: {},
         idToQuantity: {},
         orderCount: 0,
-        idToOrder: {},
         orderTotal: 0,
       ),
     );
@@ -80,7 +80,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     final idToOrder = Map.of(state.idToOrder);
     idToOrder.removeWhere((key, value) => key == event.id);
     idToQuantity.removeWhere((key, value) => key == event.id);
-    emit(state.copyWith(idToQuantity: idToQuantity, idToOrder: idToOrder));
+    emit(state.copyWith(idToOrder: idToOrder, idToQuantity: idToQuantity));
     add(const OrderQuantityChanged());
   }
 }
