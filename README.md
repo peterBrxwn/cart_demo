@@ -33,7 +33,7 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 Run `flutter pub get` to download dependencies.
-Build the application by running `flutter run --flavor dev -t lib/main_dev.dart`.
+Build the application by running `flutter run`.
 
 or run and debug sidebar, select dev (from the top dropdown), click run (icon).
 
