@@ -24,7 +24,6 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         deliveryFee: 0,
         idToOrder: {},
         idToQuantity: {},
-        orderCount: 0,
         orderTotal: 0,
       ),
     );
@@ -34,12 +33,9 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     final idToQuantity = Map.of(state.idToQuantity);
     final quantity = idToQuantity[event.id];
     if (quantity == null || quantity == 0) return;
+    if (quantity == 1) return add(OrderRemove(id: event.id));
 
-    if (quantity == 1) {
-      return add(OrderRemove(id: event.id));
-    }
-
-    idToQuantity[event.id] = idToQuantity[event.id]! - 1;
+    idToQuantity[event.id] = quantity - 1;
     emit(state.copyWith(idToQuantity: idToQuantity));
     add(const OrderQuantityChanged());
   }
@@ -61,16 +57,15 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     OrderQuantityChanged event,
     Emitter<OrderState> emit,
   ) {
-    double orderTotal = 0;
     final idToQuantity = Map.of(state.idToQuantity);
+    double orderTotal = 0;
     for (final order in state.idToOrder.values) {
       orderTotal += (order.price.amount / 100 * idToQuantity[order.id]!);
     }
-    final deliveryFee = orderTotal * 0.05;
     emit(
       state.copyWith(
-        deliveryFee: deliveryFee,
-        orderTotal: deliveryFee + orderTotal,
+        deliveryFee: orderTotal * 0.05,
+        orderTotal: orderTotal * 1.05,
       ),
     );
   }

@@ -18,7 +18,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
       ((e) => log(e.exceptionAsString(), stackTrace: e.stack));
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   Bloc.observer = AppBlocObserver();
   await runZonedGuarded(

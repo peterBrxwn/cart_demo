@@ -13,9 +13,8 @@ part 'product_event.dart';
 part 'product_state.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
-  ProductBloc({
-    required ProductRepo productRepo,
-  })  : _productRepo = productRepo,
+  ProductBloc({required ProductRepo productRepo})
+      : _productRepo = productRepo,
         super(const ProductState()) {
     on<ProductInit>(_productInit);
   }

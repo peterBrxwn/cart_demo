@@ -120,7 +120,7 @@ class _PageHeader extends StatelessWidget {
                     state.taxon!.name,
                     style: Theme.of(context)
                         .textTheme
-                        .headline4!
+                        .headlineMedium!
                         .copyWith(color: AppTheme.white),
                   ),
                 ),
@@ -158,14 +158,15 @@ class _ProductDetail extends StatelessWidget {
                       children: [
                         Text(
                           'Proteins',
-                          style: Theme.of(context).textTheme.overline!.copyWith(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.labelSmall!.copyWith(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
                         Text(
                           '16.2 gr',
-                          style: Theme.of(context).textTheme.caption!,
+                          style: Theme.of(context).textTheme.bodySmall!,
                         ),
                       ],
                     ),
@@ -175,14 +176,15 @@ class _ProductDetail extends StatelessWidget {
                       children: [
                         Text(
                           'Carbohydrate',
-                          style: Theme.of(context).textTheme.overline!.copyWith(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.labelSmall!.copyWith(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
                         Text(
                           '16.2 gr',
-                          style: Theme.of(context).textTheme.caption!,
+                          style: Theme.of(context).textTheme.bodySmall!,
                         ),
                       ],
                     ),
@@ -192,14 +194,15 @@ class _ProductDetail extends StatelessWidget {
                       children: [
                         Text(
                           'Fibre',
-                          style: Theme.of(context).textTheme.overline!.copyWith(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.labelSmall!.copyWith(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
                         Text(
                           '16.2 gr',
-                          style: Theme.of(context).textTheme.caption!,
+                          style: Theme.of(context).textTheme.bodySmall!,
                         ),
                       ],
                     ),
@@ -246,7 +249,7 @@ class _PieChart extends StatelessWidget {
       ringStrokeWidth: 3,
       centerText: "510\nkCal",
       centerTextStyle:
-          Theme.of(context).textTheme.overline!.copyWith(fontSize: 7.5),
+          Theme.of(context).textTheme.labelSmall!.copyWith(fontSize: 7.5),
       legendOptions: const LegendOptions(
         showLegends: false,
       ),

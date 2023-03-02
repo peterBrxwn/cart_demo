@@ -31,16 +31,16 @@ class AppTheme {
   static const _swapColors = false;
   static final _fontFamily = GoogleFonts.inter().fontFamily;
   static const _textTheme = TextTheme(
-    headline1: TextStyle(fontSize: 57, fontWeight: FontWeight.w900),
-    headline2: TextStyle(fontSize: 45, fontWeight: FontWeight.w900),
-    headline3: TextStyle(fontSize: 36, fontWeight: FontWeight.w900),
-    headline4: TextStyle(fontWeight: FontWeight.w900),
-    headline5: TextStyle(fontWeight: FontWeight.w900),
-    headline6: TextStyle(fontWeight: FontWeight.w900),
-    subtitle1: TextStyle(fontWeight: FontWeight.bold),
-    subtitle2: TextStyle(fontWeight: FontWeight.bold),
-    overline: TextStyle(fontSize: 11, letterSpacing: 0.5),
-    bodyText1: TextStyle(fontSize: 18, color: AppTheme.themePrimary),
+    displayLarge: TextStyle(fontSize: 57, fontWeight: FontWeight.w900),
+    displayMedium: TextStyle(fontSize: 45, fontWeight: FontWeight.w900),
+    displaySmall: TextStyle(fontSize: 36, fontWeight: FontWeight.w900),
+    headlineMedium: TextStyle(fontWeight: FontWeight.w900),
+    headlineSmall: TextStyle(fontWeight: FontWeight.w900),
+    titleLarge: TextStyle(fontWeight: FontWeight.w900),
+    titleMedium: TextStyle(fontWeight: FontWeight.bold),
+    titleSmall: TextStyle(fontWeight: FontWeight.bold),
+    labelSmall: TextStyle(fontSize: 11, letterSpacing: 0.5),
+    bodyLarge: TextStyle(fontSize: 18, color: AppTheme.themePrimary),
   );
   static const _surfaceMode = FlexSurfaceMode.highBackgroundLowScaffold;
   static const _blendLevel = 15;
