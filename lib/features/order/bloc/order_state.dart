@@ -32,7 +32,7 @@ class OrderState extends Equatable {
       idToOrder: idToOrder ?? this.idToOrder,
       idToQuantity: idToQuantity ?? this.idToQuantity,
       notifMsg: notifMsg ?? this.notifMsg,
-      orderCount: (idToOrder ?? this.idToOrder).keys.length,
+      orderCount: (idToQuantity ?? this.idToQuantity).keys.length,
       orderTotal: orderTotal ?? this.orderTotal,
       status: status ?? OrderStatus.initial,
     );

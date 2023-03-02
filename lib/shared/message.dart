@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 class Message extends StatelessWidget {
   final String message;
   const Message({
-    Key? key,
     this.message = 'Something went wrong.',
+    Key? key,
   }) : super(key: key);
 
   @override

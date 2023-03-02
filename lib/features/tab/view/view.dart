@@ -1,5 +1,5 @@
 // Flutter imports:
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Badge;
 
 // Package imports:
 import 'package:auto_route/auto_route.dart';
